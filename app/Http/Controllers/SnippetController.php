@@ -18,4 +18,11 @@ class SnippetController extends Controller
     {
         return view('snippets.edit', compact('snippet'));
     }
+
+    public function update(SnippetRequest $request, Snippet $snippet): \Illuminate\Http\RedirectResponse
+    {
+        $snippet->update($request->validated());
+
+        return redirect()->route('snippets.edit', $snippet);
+    }
 }

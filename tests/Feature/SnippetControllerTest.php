@@ -35,4 +35,21 @@ class SnippetControllerTest extends TestCase
             ->assertViewIs('snippets.edit')
             ->assertViewHas('snippet', $snippet);
     }
+
+    public function test_it_updates_a_snippet(): void
+    {
+        $snippet = Snippet::factory()->create();
+
+        $this
+            ->put(route('snippets.edit', $snippet), [
+                'code' => 'update-code',
+            ])
+            ->assertStatus(Response::HTTP_FOUND)
+            ->assertRedirect(route('snippets.edit', $snippet));
+
+        $this->assertDatabaseHas('snippets', [
+            'id' => $snippet->id,
+            'code' => 'update-code',
+        ]);
+    }
 }
