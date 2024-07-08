@@ -14,7 +14,7 @@ return new class extends Migration
         Schema::create('snippets', function (Blueprint $table) {
             $table->id();
 
-            $table->string('code');
+            $table->text('code');
             
             $table->timestamps();
         });

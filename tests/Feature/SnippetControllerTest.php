@@ -24,4 +24,15 @@ class SnippetControllerTest extends TestCase
             'code' => 'class SnippetControllerTest { }',
         ]);
     }
+
+    public function test_it_display_edit_form_for_snippet(): void
+    {
+        $snippet = Snippet::factory()->create();
+
+        $this
+            ->get(route('snippets.edit', $snippet))
+            ->assertStatus(Response::HTTP_OK)
+            ->assertViewIs('snippets.edit')
+            ->assertViewHas('snippet', $snippet);
+    }
 }

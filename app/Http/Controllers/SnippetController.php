@@ -13,4 +13,9 @@ class SnippetController extends Controller
 
         return redirect()->route('snippets.edit', $snippet);
     }
+
+    public function edit(Snippet $snippet): \Illuminate\View\View
+    {
+        return view('snippets.edit', compact('snippet'));
+    }
 }
