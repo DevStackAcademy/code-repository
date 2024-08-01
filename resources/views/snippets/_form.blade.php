@@ -10,7 +10,11 @@
             <h3 class="font-semibold uppercase mb-8">Explorer</h3>
 
             <div>
-                <input type="submit" class="bg-indigo-500 text-indigo-50 w-full py-1 text-xs uppercase cursor-pointer">
+                <input 
+                    type="submit" 
+                    value="{{ $buttonText ?? 'Submit' }}"
+                    class="bg-indigo-500 text-indigo-50 w-full py-1 text-xs uppercase cursor-pointer"
+                >
             </div>
         </div>
     </div>

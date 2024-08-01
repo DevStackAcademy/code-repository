@@ -16,7 +16,9 @@ class SnippetController extends Controller
 
     public function edit(Snippet $snippet): \Illuminate\View\View
     {
-        return view('snippets.edit', compact('snippet'));
+        $buttonText = 'Update';
+
+        return view('snippets.edit', compact('snippet', 'buttonText'));
     }
 
     public function update(SnippetRequest $request, Snippet $snippet): \Illuminate\Http\RedirectResponse
