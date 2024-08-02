@@ -18,7 +18,7 @@
             <a 
                 href="#"
                 onclick="event.preventDefault(); document.getElementById('fork').submit();"
-                class="block text-center text-indigo-500 hover:underline text-ls uppercase"
+                class="block text-center text-indigo-500 hover:underline text-ls uppercase cursor-pointer"
             >
                 Fork
             </a>

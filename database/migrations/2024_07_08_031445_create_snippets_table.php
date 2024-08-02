@@ -12,9 +12,11 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('snippets', function (Blueprint $table) {
-            $table->id();
+            $table->uuid('id')->primary();
 
-            $table->foreignId('parent_id')->nullable()->constrained('snippets');
+            $table->uuid('parent_id')->nullable();
+            $table->foreign('parent_id')->references('id')->on('snippets');
+
             $table->text('code');
             
             $table->timestamps();
