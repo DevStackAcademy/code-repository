@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('snippets', function (Blueprint $table) {
             $table->id();
 
+            $table->foreignId('parent_id')->nullable()->constrained('snippets');
             $table->text('code');
             
             $table->timestamps();

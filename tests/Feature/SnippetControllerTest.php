@@ -52,4 +52,18 @@ class SnippetControllerTest extends TestCase
             'code' => 'update-code',
         ]);
     }
+
+    public function test_it_create_a_fork_of_a_snippet(): void
+    {
+        $original = Snippet::factory()->create();
+
+        $this
+            ->post(route('snippets.fork', $original))
+            ->assertStatus(Response::HTTP_FOUND);
+
+        $this->assertDatabaseHas('snippets', [
+            'parent_id' => $original->id,
+            'code' => $original->code,
+        ]);
+    }
 }

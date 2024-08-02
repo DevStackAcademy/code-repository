@@ -27,4 +27,13 @@ class SnippetController extends Controller
 
         return redirect()->route('snippets.edit', $snippet);
     }
+
+    public function fork(Snippet $snippet): \Illuminate\Http\RedirectResponse
+    {
+        $fork = $snippet->replicate();
+        $fork->parent_id = $snippet->id;
+        $fork->save();
+
+        return redirect()->route('snippets.edit', $fork);
+    }
 }

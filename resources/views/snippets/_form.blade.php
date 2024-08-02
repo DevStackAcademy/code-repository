@@ -1,24 +1,8 @@
-<div class="flex border-l-2 border-indigo-500">
-    <main class="w-full">
-        <textarea
-            id="editor"
-            name="code">{{ optional($snippet ?? null)->code }}</textarea>
-    </main>
-
-    <div class="min-w-40">
-        <div class="p-4">
-            <h3 class="font-semibold uppercase mb-8">Explorer</h3>
-
-            <div>
-                <input 
-                    type="submit" 
-                    value="{{ $buttonText ?? 'Submit' }}"
-                    class="bg-indigo-500 text-indigo-50 w-full py-1 text-xs uppercase cursor-pointer"
-                >
-            </div>
-        </div>
-    </div>
-</div>
+<main class="w-full">
+    <textarea
+        id="editor"
+        name="code">{{ optional($snippet ?? null)->code }}</textarea>
+</main>
 
 @section('styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css">
