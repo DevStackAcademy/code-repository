@@ -15,14 +15,34 @@ class SnippetControllerTest extends TestCase
     {
         $this
             ->post('/', [
+                'title' => 'SnippetControllerTest',
                 'code' => 'class SnippetControllerTest { }',
             ])
             ->assertStatus(Response::HTTP_FOUND)
             ->assertRedirect('/'.Snippet::first()->id);
 
         $this->assertDatabaseHas('snippets', [
+            'title' => 'SnippetControllerTest',
             'code' => 'class SnippetControllerTest { }',
         ]);
+    }
+
+    public function test_it_title_is_required(): void
+    {
+        $this
+            ->post('/', [
+                'code' => 'class SnippetControllerTest { }',
+            ])
+            ->assertSessionHasErrors('title');
+    }
+
+    public function test_it_code_is_required(): void
+    {
+        $this
+            ->post('/', [
+                'title' => 'SnippetControllerTest',
+            ])
+            ->assertSessionHasErrors('code');
     }
 
     public function test_it_display_edit_form_for_snippet(): void
@@ -42,6 +62,7 @@ class SnippetControllerTest extends TestCase
 
         $this
             ->put(route('snippets.edit', $snippet), [
+                'title' => 'update-title',
                 'code' => 'update-code',
             ])
             ->assertStatus(Response::HTTP_FOUND)

@@ -47,4 +47,16 @@ class SnippetTest extends TestCase
             'parent_id' => $snippet->id,
         ]);
     }
+
+    public function test_it_has_all_fields(): void
+    {
+        $snippet = Snippet::factory()->create();
+
+        $this->assertDatabaseHas('snippets', [
+            'id' => $snippet->id,
+            'parent_id' => $snippet->parent_id,
+            'title' => $snippet->title,
+            'code' => $snippet->code,            
+        ]);
+    }
 }

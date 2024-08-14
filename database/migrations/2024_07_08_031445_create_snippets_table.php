@@ -17,6 +17,7 @@ return new class extends Migration
             $table->uuid('parent_id')->nullable();
             $table->foreign('parent_id')->references('id')->on('snippets');
 
+            $table->string('title');
             $table->text('code');
             
             $table->timestamps();

@@ -22,6 +22,7 @@ class SnippetRequest extends FormRequest
     public function rules(): array
     {
         return [
+            'title' => 'required|string',
             'code' => 'required|string',
         ];
     }

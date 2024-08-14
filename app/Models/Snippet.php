@@ -10,7 +10,7 @@ class Snippet extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $fillable = ['code'];
+    protected $fillable = ['title', 'code'];
 
     public function parent(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
