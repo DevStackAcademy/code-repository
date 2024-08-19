@@ -56,6 +56,17 @@ class SnippetControllerTest extends TestCase
             ->assertViewHas('snippet', $snippet);
     }
 
+    public function test_it_displays_show_view_for_snippet(): void
+    {
+        $snippet = Snippet::factory()->create();
+
+        $this
+            ->get(route('snippets.show', $snippet))
+            ->assertStatus(Response::HTTP_OK)
+            ->assertViewIs('snippets.show')
+            ->assertViewHas('snippet', $snippet);
+    }
+
     public function test_it_updates_a_snippet(): void
     {
         $snippet = Snippet::factory()->create();

@@ -1,8 +1,6 @@
-<main class="w-full">
-    <textarea
-        id="editor"
-        name="code">{{ optional($snippet ?? null)->code }}</textarea>
-</main>
+<textarea
+    id="editor"
+    name="code">{{ old('code', optional($snippet ?? null)->code) }}</textarea>
 
 @section('styles')
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/6.65.7/codemirror.min.css">
@@ -10,7 +8,7 @@
 
 <style>
     .CodeMirror {
-        height: 100vh;
+        height: calc(100vh - 40px);
         font-size: 14px;
     }
 </style>
