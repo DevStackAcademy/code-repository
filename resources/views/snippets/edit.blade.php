@@ -6,7 +6,7 @@
         @method('PUT')
 
         <x-forms.top>
-            <x-forms.label />
+            <x-forms.breadcrumb />
 
             <x-forms.input-text name="title" value="{{ optional($snippet ?? null)->title }}" class="flex-1" />
 

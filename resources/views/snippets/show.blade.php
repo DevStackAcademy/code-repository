@@ -5,7 +5,7 @@
     <x-forms.form action="{{ route('snippets.fork', $snippet) }}">
 
         <x-forms.top>
-            <x-forms.label :snippet="$snippet" />
+            <x-forms.breadcrumb :snippet="$snippet" />
 
             <x-forms.button>Create Fork</x-forms.button>
         </x-forms.top>

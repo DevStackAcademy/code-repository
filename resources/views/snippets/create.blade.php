@@ -5,7 +5,7 @@
     <x-forms.form action="{{ route('snippets.store') }}">
 
         <x-forms.top>
-            <x-forms.label />
+            <x-forms.breadcrumb />
 
             <x-forms.input-text name="title" value="{{ optional($snippet ?? null)->title }}" />
 

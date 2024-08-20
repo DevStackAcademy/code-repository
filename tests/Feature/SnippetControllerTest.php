@@ -19,7 +19,7 @@ class SnippetControllerTest extends TestCase
                 'code' => 'class SnippetControllerTest { }',
             ])
             ->assertStatus(Response::HTTP_FOUND)
-            ->assertRedirect('/'.Snippet::first()->id);
+            ->assertRedirect(route('snippets.edit', Snippet::first()));
 
         $this->assertDatabaseHas('snippets', [
             'title' => 'SnippetControllerTest',
@@ -72,7 +72,7 @@ class SnippetControllerTest extends TestCase
         $snippet = Snippet::factory()->create();
 
         $this
-            ->put(route('snippets.edit', $snippet), [
+            ->put(route('snippets.update', $snippet), [
                 'title' => 'update-title',
                 'code' => 'update-code',
             ])
