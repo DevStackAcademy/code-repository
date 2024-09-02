@@ -9,7 +9,7 @@ class SnippetController extends Controller
 {
     public function store(SnippetRequest $request): \Illuminate\Http\RedirectResponse
     {
-        $snippet = Snippet::create($request->validated());
+        $snippet = $request->user()->snippets()->create($request->validated());
 
         return redirect()->route('snippets.edit', $snippet);
     }

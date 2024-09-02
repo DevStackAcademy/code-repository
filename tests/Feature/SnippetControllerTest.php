@@ -14,11 +14,9 @@ class SnippetControllerTest extends TestCase
 
     public function test_it_stores_a_snippet(): void
     {
-        $user = User::factory()->create();
-
         $this
+            ->actingAs(User::factory()->create())
             ->post('/', [
-                'user_id' => $user->id,
                 'title' => 'SnippetControllerTest',
                 'code' => 'class SnippetControllerTest { }',
             ])
@@ -77,7 +75,6 @@ class SnippetControllerTest extends TestCase
 
         $this
             ->put(route('snippets.update', $snippet), [
-                'user_id' => $snippet->user_id,
                 'title' => 'update-title',
                 'code' => 'update-code',
             ])
