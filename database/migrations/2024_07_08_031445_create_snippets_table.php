@@ -16,6 +16,7 @@ return new class extends Migration
 
             $table->uuid('parent_id')->nullable();
             $table->foreign('parent_id')->references('id')->on('snippets');
+            $table->foreignId('user_id')->constrained();
 
             $table->string('title');
             $table->text('code');

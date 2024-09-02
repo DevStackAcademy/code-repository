@@ -5,11 +5,19 @@ namespace Tests\Unit;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Support\Collection;
 use App\Models\Snippet;
+use App\Models\User;
 use Tests\TestCase;
 
 class SnippetTest extends TestCase
 {
     use RefreshDatabase;
+
+    public function test_it_belongs_to_user(): void
+    {
+        $snippet = Snippet::factory()->create();
+
+        $this->assertInstanceOf(User::class, $snippet->user);
+    }
 
     public function test_fork_belongs_to_parent(): void
     {

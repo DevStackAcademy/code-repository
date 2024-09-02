@@ -44,4 +44,14 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    /**
+     * Get the snippets for the user.
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function snippets(): \Illuminate\Database\Eloquent\Relations\HasMany
+    {
+        return $this->hasMany(Snippet::class);
+    }
 }

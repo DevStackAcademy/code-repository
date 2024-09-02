@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Response;
 use App\Models\Snippet;
+use App\Models\User;
 use Tests\TestCase;
 
 class SnippetControllerTest extends TestCase
@@ -13,8 +14,11 @@ class SnippetControllerTest extends TestCase
 
     public function test_it_stores_a_snippet(): void
     {
+        $user = User::factory()->create();
+
         $this
             ->post('/', [
+                'user_id' => $user->id,
                 'title' => 'SnippetControllerTest',
                 'code' => 'class SnippetControllerTest { }',
             ])
@@ -73,6 +77,7 @@ class SnippetControllerTest extends TestCase
 
         $this
             ->put(route('snippets.update', $snippet), [
+                'user_id' => $snippet->user_id,
                 'title' => 'update-title',
                 'code' => 'update-code',
             ])

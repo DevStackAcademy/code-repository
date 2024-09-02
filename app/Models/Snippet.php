@@ -10,7 +10,17 @@ class Snippet extends Model
 {
     use HasFactory, HasUuids;
 
-    protected $fillable = ['title', 'code'];
+    protected $fillable = ['user_id', 'title', 'code'];
+
+    /**
+     * Get the user that owns the Snippet
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
+     */
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
 
     public function parent(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
