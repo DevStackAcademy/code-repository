@@ -9,3 +9,7 @@ Route::post('{snippet}/fork', [SnippetController::class, 'fork'])->name('snippet
 Route::get('{snippet}', [SnippetController::class, 'show'])->name('snippets.show');
 Route::get('{snippet}/edit', [SnippetController::class, 'edit'])->name('snippets.edit');
 Route::put('{snippet}', [SnippetController::class, 'update'])->name('snippets.update');
+
+Route::get('login', function () {
+    return 'Login';
+})->name('login');
