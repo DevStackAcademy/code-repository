@@ -2,6 +2,7 @@
 
 namespace Tests\Feature;
 
+use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Laravel\Socialite\Facades\Socialite;
 use Illuminate\Http\Response;
@@ -10,7 +11,7 @@ use Tests\TestCase;
 class GithubAuthenticatorControllerTest extends TestCase
 {
     use RefreshDatabase;
-    
+
     public function test_it_redirects_to_github()
     {
         $this
@@ -36,6 +37,28 @@ class GithubAuthenticatorControllerTest extends TestCase
             'email' => 'i@test.com',
         ]);
 
+        $this->assertAuthenticated();
+    }
+
+    public function test_it_authenticates_existing_user_with_github()
+    {
+        $user = User::factory()->create([
+            'email' => 'i@test.com',
+            'github_id' => 'github-id-example',
+        ]);
+
+        Socialite::shouldReceive('driver->user')->andReturn(
+            (object) [
+                'id' => 'github-id-example',
+                'name' => 'User test',
+                'email' => 'i@test.com',
+            ]);
+
+        $this
+            ->get(route('auth.github.callback'))
+            ->assertStatus(Response::HTTP_FOUND);
+
+        $this->assertEquals($user->id, auth()->id());
         $this->assertAuthenticated();
     }
 }
