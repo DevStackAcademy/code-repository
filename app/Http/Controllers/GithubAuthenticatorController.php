@@ -13,6 +13,6 @@ class GithubAuthenticatorController extends Controller
 
     public function callback(GithubAuthenticator $githubAuthenticator)
     {
-        return $githubAuthenticator->handleProviderCallback();
+        return $githubAuthenticator->handleCallback();
     }
 }

@@ -16,3 +16,4 @@ Route::get('login', function () {
 })->name('login');
 
 Route::get('auth/github/redirect', [GithubAuthenticatorController::class, 'redirect'])->name('auth.github');
+Route::get('auth/github/callback', [GithubAuthenticatorController::class, 'callback'])->name('auth.github.callback');
