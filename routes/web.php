@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\GithubAuthenticatorController;
 use App\Http\Controllers\SnippetController;
 use Illuminate\Support\Facades\Route;
 
@@ -13,3 +14,5 @@ Route::put('{snippet}', [SnippetController::class, 'update'])->name('snippets.up
 Route::get('login', function () {
     return 'Login';
 })->name('login');
+
+Route::get('auth/github/redirect', [GithubAuthenticatorController::class, 'redirect'])->name('auth.github');
