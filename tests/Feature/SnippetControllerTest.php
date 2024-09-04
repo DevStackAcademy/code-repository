@@ -32,6 +32,7 @@ class SnippetControllerTest extends TestCase
     public function test_it_title_is_required(): void
     {
         $this
+            ->actingAs(User::factory()->create())
             ->post('/', [
                 'code' => 'class SnippetControllerTest { }',
             ])
@@ -41,6 +42,7 @@ class SnippetControllerTest extends TestCase
     public function test_it_code_is_required(): void
     {
         $this
+            ->actingAs(User::factory()->create())
             ->post('/', [
                 'title' => 'SnippetControllerTest',
             ])
@@ -74,6 +76,7 @@ class SnippetControllerTest extends TestCase
         $snippet = Snippet::factory()->create();
 
         $this
+            ->actingAs($snippet->user)
             ->put(route('snippets.update', $snippet), [
                 'title' => 'update-title',
                 'code' => 'update-code',
@@ -92,6 +95,7 @@ class SnippetControllerTest extends TestCase
         $original = Snippet::factory()->create();
 
         $this
+            ->actingAs($original->user)
             ->post(route('snippets.fork', $original))
             ->assertStatus(Response::HTTP_FOUND);
 
