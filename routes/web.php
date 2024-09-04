@@ -7,9 +7,7 @@ use Illuminate\Support\Facades\Route;
 Route::middleware('guest')->group(function () {
     Route::view('/', 'snippets.create')->name('home');
 
-    Route::get('login', function () {
-        return 'Login';
-    })->name('login');
+    Route::view('login', 'auth.login')->name('login');
     
     Route::get('{snippet}', [SnippetController::class, 'show'])->name('snippets.show');
     Route::get('{snippet}/edit', [SnippetController::class, 'edit'])->name('snippets.edit');

@@ -52,6 +52,7 @@ class SnippetTest extends TestCase
 
         $this->assertInstanceOf(Snippet::class, $fork);
         $this->assertEquals($snippet->id, $fork->parent_id);
+        $this->assertEquals($user->id, $fork->user_id);
 
         $this->assertDatabaseHas('snippets', [
             'id' => $fork->id,
