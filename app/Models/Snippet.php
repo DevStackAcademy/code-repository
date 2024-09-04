@@ -51,7 +51,9 @@ class Snippet extends Model
     public static function createFork(Snippet $snippet): Snippet
     {
         $fork = $snippet->replicate();
+        
         $fork->parent_id = $snippet->id;
+        $fork->user_id = auth()->id();
         $fork->save();
 
         return $fork;

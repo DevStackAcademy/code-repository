@@ -45,6 +45,9 @@ class SnippetTest extends TestCase
     public function test_create_a_fork(): void
     {
         $snippet = Snippet::factory()->create();
+
+        $this->actingAs($user = User::factory()->create());
+
         $fork = Snippet::createFork($snippet);
 
         $this->assertInstanceOf(Snippet::class, $fork);
@@ -53,6 +56,7 @@ class SnippetTest extends TestCase
         $this->assertDatabaseHas('snippets', [
             'id' => $fork->id,
             'parent_id' => $snippet->id,
+            'user_id' => $user->id,
         ]);
     }
 

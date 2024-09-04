@@ -104,4 +104,19 @@ class SnippetControllerTest extends TestCase
             'code' => $original->code,
         ]);
     }
+
+    public function test_fork_is_owned_by_user_if_created_by_user(): void
+    {
+        $original = Snippet::factory()->create();
+
+        $this
+            ->actingAs($me = User::factory()->create())
+            ->post(route('snippets.fork', $original))
+            ->assertStatus(Response::HTTP_FOUND);
+
+        $this->assertDatabaseHas('snippets', [
+            'parent_id' => $original->id,
+            'user_id' => $me->id,
+        ]);
+    }
 }
