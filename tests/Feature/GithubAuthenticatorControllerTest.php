@@ -61,4 +61,18 @@ class GithubAuthenticatorControllerTest extends TestCase
         $this->assertEquals($user->id, auth()->id());
         $this->assertAuthenticated();
     }
+
+    public function test_it_handles_exception()
+    {
+        Socialite::shouldReceive('driver->user')->andThrow(
+            new \Exception
+        );
+
+        $this
+            ->get(route('auth.github.callback'))
+            ->assertStatus(Response::HTTP_FOUND);
+
+        $this->assertDatabaseCount('users', 0);
+        $this->assertGuest();
+    }
 }
