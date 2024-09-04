@@ -19,5 +19,7 @@ Route::middleware('guest')->group(function () {
 Route::middleware('auth')->group(function () {
     Route::post('/', [SnippetController::class, 'store'])->name('snippets.store');
     Route::post('{snippet}/fork', [SnippetController::class, 'fork'])->name('snippets.fork');
-    Route::put('{snippet}', [SnippetController::class, 'update'])->name('snippets.update');
+    Route::put('{snippet}', [SnippetController::class, 'update'])
+        ->middleware('can:update,snippet')
+        ->name('snippets.update');
 });
