@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Http\Requests\SnippetRequest;
+use Illuminate\Support\Facades\Gate;
 use App\Models\Snippet;
 
 class SnippetController extends Controller
@@ -26,6 +27,8 @@ class SnippetController extends Controller
 
     public function update(SnippetRequest $request, Snippet $snippet): \Illuminate\Http\RedirectResponse
     {
+        Gate::authorize('update', $snippet);
+
         $snippet->update($request->validated());
 
         return redirect()->route('snippets.edit', $snippet);

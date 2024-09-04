@@ -90,6 +90,25 @@ class SnippetControllerTest extends TestCase
         ]);
     }
 
+    public function test_it_forbids_updating_a_snippet_not_owned_by_the_user(): void
+    {
+        $snippet = Snippet::factory()->create();
+        $anotherUser = User::factory()->create();
+
+        $this
+            ->actingAs($anotherUser)
+            ->put(route('snippets.update', $snippet), [
+                'title' => 'new-title',
+                'code' => 'new-code',
+            ])
+            ->assertStatus(Response::HTTP_FORBIDDEN);
+
+        $this->assertDatabaseMissing('snippets', [
+            'id' => $snippet->id,
+            'code' => 'new-code',
+        ]);
+    }
+
     public function test_it_create_a_fork_of_a_snippet(): void
     {
         $original = Snippet::factory()->create();
